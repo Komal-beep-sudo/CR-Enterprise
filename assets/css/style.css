@@ -751,3 +751,8 @@ a.ntab { text-decoration:none; display:inline-flex; align-items:center; }
 .logo { text-decoration:none; }
 .ft-col ul li a { display:inline-block; }
 @media(max-width:600px){ .mob-nav a { padding:13px 14px; font-size:.95rem; } }
+
+/* SEO: screen-reader-only H1 for the home page, whose hero heading is part of
+   the slider artwork. Does not affect layout or visual appearance. */
+.seo-h1{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}

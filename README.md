@@ -50,7 +50,8 @@ Keep the `.nojekyll` file - without it GitHub may skip parts of `assets/`.
 
 ## Before going live
 
-- Edit `sitemap.xml` and replace `https://www.creneu.com/` with the real domain.
+- `sitemap.xml`, canonical tags and Open Graph URLs all point at `https://creneuindia.com`.
+  If the domain ever changes, update it in every `.html` head, `sitemap.xml` and `robots.txt`.
 - Optionally add a `CNAME` file containing your domain if you point a custom
   domain at GitHub Pages.
 
