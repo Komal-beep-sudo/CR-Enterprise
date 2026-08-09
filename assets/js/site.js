@@ -61,8 +61,10 @@ var products = [
 {id:122,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"10 Litre Dustbin",desc:"Colour-coded 10 litre pedal dustbin available in red, yellow, blue and black. Hands-free foot-operated hospital waste bin that supports BMW Rules, 2016 colour-coded segregation and helps reduce cross-contamination.",price:"Price on Request",img:"assets/img/cr-0067.webp",feat:["Available in red, yellow, blue &amp; black","10 litre capacity","Hands-free foot pedal operation","Sturdy carry handle","Supports colour-coded waste segregation","Durable virgin plastic body","Easy to clean and disinfect","Suitable for hospitals, clinics &amp; labs","Made in India"]},
 
 {id:128,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"20 Litre Economy Dustbin",desc:"Economy 20 litre pedal dustbin available in blue, green, red and yellow. Budget-friendly hands-free foot-operated waste bin for everyday hospital, clinic and office use, supporting BMW Rules, 2016 colour-coded segregation.",price:"Price on Request",img:"assets/img/cr-0068.webp",feat:["Available in blue, green, red &amp; yellow","20 litre capacity","Hands-free foot pedal operation","Economy virgin plastic body","Supports colour-coded waste segregation","Lightweight and easy to move","Easy to clean and disinfect","Suitable for hospitals, clinics &amp; offices","Made in India"]},
+  {id:329,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"30 Litre Dustbin",desc:"30 litre pedal dustbin available in blue, green, red and yellow. Hands-free foot-operated waste bin with a tight-fitting hinged lid, sized between the 20 litre and 40 litre models for wards, corridors and utility areas, supporting BMW Rules, 2016 colour-coded segregation.",price:"Price on Request",img:"assets/img/cr-0293.webp",feat:["Available in blue, green, red &amp; yellow","30 litre capacity","Hands-free foot pedal operation","Tight-fitting hinged lid","Moulded virgin plastic body","Supports colour-coded waste segregation","Easy to clean and disinfect","Suitable for hospitals, clinics &amp; offices","Made in India"]},
 
 {id:123,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"40 Litre Premium Dustbin",desc:"Premium 40 litre pedal dustbin available in red, yellow, blue and black. Tall hands-free foot-operated waste bin ideal for high-footfall hospital and institutional areas, supporting BMW Rules, 2016 colour-coded segregation and reducing cross-contamination.",price:"Price on Request",img:"assets/img/cr-0069.webp",feat:["Available in red, yellow, blue &amp; black","40 litre high capacity","Hands-free foot pedal operation","Integrated top carry handle","Supports colour-coded waste segregation","Durable virgin plastic body","Easy to clean and disinfect","Ideal for hospitals &amp; institutions","Made in India"]},
+  {id:330,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"50 Litre Dustbin",desc:"50 litre pedal dustbin available in yellow, red, blue, green, black and white. Hands-free foot-operated waste bin with a tight-fitting hinged lid for wards, corridors, kitchens and high-footfall areas, supporting BMW Rules, 2016 colour-coded segregation.",price:"Price on Request",img:"assets/img/cr-0298.webp",feat:["Available in yellow, red, blue, green, black &amp; white","50 litre capacity","Hands-free foot pedal operation","Tight-fitting hinged lid","Moulded virgin plastic body","Supports colour-coded waste segregation","Easy to clean and disinfect","Suitable for hospitals, clinics &amp; offices","Made in India"]},
 
 {id:124,cat:"Waste Bins With Foot Pedals & Wheels",tag:"Waste Bins",name:"65 Litre Dustbin",desc:"Heavy-duty 65 litre pedal dustbin available in black and red. Large-capacity hands-free foot-operated waste bin built for high-volume hospital and institutional waste, supporting BMW Rules, 2016 colour-coded segregation.",price:"Price on Request",img:"assets/img/cr-0070.webp",feat:["Available in black &amp; red","65 litre heavy-duty capacity","Hands-free foot pedal operation","Reinforced ribbed body for strength","Supports colour-coded waste segregation","Durable virgin plastic body","Easy to clean and disinfect","Ideal for hospitals &amp; institutions","Made in India"]},
 
@@ -84,6 +86,7 @@ var products = [
 {id:136,cat:"Emergency Trolley / Crash Cart",tag:"Crash Cart",name:"Emergency Trolley (Crash Cart) &ndash; S.S. / M.S.",desc:"Stainless steel / mild steel emergency trolley with a six-drawer twin-column unit, colour-coded accessory bins on the top rail for rapid drug and consumable identification, IV rod, oxygen cylinder holder and a lower storage shelf, on swivel castors with brakes.",price:"Price on Request",img:"assets/img/cr-0263.webp",feat:["Stainless steel / mild steel tubular frame","Six drawers in twin columns","Colour-coded accessory bins on the top rail","IV rod with hook","Oxygen cylinder holder","Lower storage shelf","Side push handle","Swivel castors with brakes"]},
 {id:137,cat:"Emergency Trolley / Crash Cart",tag:"Crash Cart",name:"Emergency Trolley (Crash Cart)",desc:"ABS moulded emergency trolley with a stainless steel work top, recessed tray and four drawers with colour-coded handles under a single central lock. Fitted with a telescopic IV pole and a height-adjustable swivel side shelf on a gas strut, on four swivel castors with brakes.",price:"Price on Request",img:"assets/img/cr-0265.webp",feat:["Moulded ABS body with stainless steel work top","Four drawers with colour-coded handles","Central locking for all drawers","Telescopic IV pole with hooks","Height-adjustable swivel side shelf on a gas strut","Recessed top tray with utility compartment","Rounded, easy-clean mouldings","Four swivel castors with brakes"]},
 {id:310,cat:"Hub Cutter & Needle Destroyer",tag:"Hub Cutter & Needle Destroyer",name:"Needle Hub Cutter &ndash; 1.5 Litre",desc:"1.5 litre translucent disposable sharp container with snap-lock lid and tamper-evident closure. Printed with biohazard warning, &lsquo;do not fill above this line&rsquo; marking and a date, department and signature panel. Suitable for treatment rooms, phlebotomy and bedside sharps collection.",price:"Price on Request",img:"assets/img/cr-0080.webp",feat:["Translucent puncture-resistant body", "Snap-lock lid with tamper-evident closure", "Moulded carrying handle", "Printed biohazard warning &amp; fill line", "Date / department / signature panel", "Single use &mdash; destroy by incineration"]},
+  {id:317,cat:"Hub Cutter & Needle Destroyer",tag:"Hub Cutter & Needle Destroyer",name:"Needle Destroyer &ndash; 7 Litre",desc:"7 litre sharps container fitted with a stainless steel needle cutter assembly and lever handle. Needles are cut and drop directly into the sealed container below, so cut sharps are never handled. Supplied with a translucent lid, blue drop-in ports, stainless steel carry handle and printed fill-line and biohazard warning panels.",price:"Price on Request",img:"assets/img/cr-0292.webp",feat:["Stainless steel cutter assembly with lever handle","7 litre sealed sharps container below the cutter","Cut needles drop straight in &ndash; no handling","Translucent lid with blue drop-in ports","Stainless steel carry handle","Fill-line marking printed on the body","Biohazard warning panel printed on body","Meets Biomedical Waste Management norms"]},
   {id:311,cat:"Hub Cutter & Needle Destroyer",tag:"Hub Cutter & Needle Destroyer",name:"Needle Hub Cutter &ndash; 3.5 Litre",desc:"3.5 litre translucent sharps container fitted with a stainless steel hub cutter and needle destroyer assembly, blue lid insert and stainless steel carrying handle. Allows needles to be cut at the hub immediately after use, reducing the risk of needle-stick injury during collection and transport.",price:"Price on Request",img:"assets/img/cr-0081.webp",feat:["Stainless steel hub cutter / needle destroyer", "Translucent container for content visibility", "Puncture-resistant &amp; leak-proof body", "Stainless steel carrying handle", "Printed biohazard warning &amp; fill line", "Single use &mdash; destroy by incineration"]},
   {id:312,cat:"Hub Cutter & Needle Destroyer",tag:"Hub Cutter & Needle Destroyer",name:"Needle Hub Cutter &ndash; 5 Litre",desc:"5 litre sharps container with stainless steel hub cutter and needle destroyer mounted on the lid, blue lid insert and stainless steel carrying handle. Printed with caution and biohazard labelling for disposal as per Bio-Medical Waste Management Rules, 2016. Suited to OPD, wards and treatment rooms.",price:"Price on Request",img:"assets/img/cr-0291.webp",feat:["Stainless steel hub cutter / needle destroyer", "Translucent container for content visibility", "Puncture-resistant &amp; leak-proof body", "Stainless steel carrying handle", "Printed biohazard warning &amp; fill line", "Single use &mdash; destroy by incineration"]},
   {id:313,cat:"Hub Cutter & Needle Destroyer",tag:"Hub Cutter & Needle Destroyer",name:"Needle Hub Cutter &ndash; 7 Litre",desc:"7 litre sharps container with stainless steel hub cutter and needle destroyer assembly, blue lid insert and stainless steel carrying handle. Higher-capacity option for ICUs, emergency care, surgical units and high-volume sharps generation areas.",price:"Price on Request",img:"assets/img/cr-0083.webp",feat:["Stainless steel hub cutter / needle destroyer", "Translucent container for content visibility", "Puncture-resistant &amp; leak-proof body", "Stainless steel carrying handle", "Printed biohazard warning &amp; fill line", "Single use &mdash; destroy by incineration"]},
@@ -240,7 +243,7 @@ var CR_VOL_L = {
 var CR_VOL_MIN = 0.6, CR_VOL_MAX = 25, CR_SIZE_FLOOR = 45, CR_SIZE_CEIL = 112;
 /* large sizes are set explicitly - the cube-root band cannot span a 600 ML
    and a 25 L bin and still keep the top end visually large */
-var CR_SIZE_OVERRIDE = {328: 82, 104: 87, 105: 92, 326: 100, 107: 104, 327: 118, 108: 112,
+var CR_SIZE_OVERRIDE = {317: 60, 328: 82, 104: 87, 105: 92, 326: 100, 107: 104, 327: 118, 108: 112,
   /* hub cutters & needle destroyers - cube-root of capacity, 0.3 L to 7 L */
   314: 45, 315: 47, 316: 54, 310: 60, 311: 76, 312: 88, 313: 100};
 
@@ -349,8 +352,8 @@ function startC11Slider() {
 }
 
 
-var AC_START = {328:1, 326:2, 327:0, 130:0, 129:0, 128:0, 126:0, 125:0, 124:0, 123:2, 122:0, 325:0, 320:0, 324:1};
-  var AC_SLIDES = {328:["assets/img/cr-0287.webp", "assets/img/cr-0288.webp", "assets/img/cr-0289.webp", "assets/img/cr-0290.webp"],326:["assets/img/cr-0271.webp", "assets/img/cr-0272.webp", "assets/img/cr-0273.webp", "assets/img/cr-0274.webp"],327:["assets/img/cr-0275.webp", "assets/img/cr-0276.webp", "assets/img/cr-0277.webp", "assets/img/cr-0278.webp"],130:["assets/img/cr-0283.webp"],129:["assets/img/cr-0196.webp"],128:["assets/img/cr-0197.webp", "assets/img/cr-0198.webp", "assets/img/cr-0199.webp"],126:["assets/img/cr-0200.webp", "assets/img/cr-0201.webp", "assets/img/cr-0202.webp"],125:["assets/img/cr-0203.webp"],124:["assets/img/cr-0204.webp"],123:["assets/img/cr-0205.webp", "assets/img/cr-0206.webp", "assets/img/cr-0207.webp"],122:["assets/img/cr-0208.webp", "assets/img/cr-0209.webp", "assets/img/cr-0210.webp"],325:["assets/img/cr-0194.webp", "assets/img/cr-0058.webp", "assets/img/cr-0193.webp"],324:["assets/img/cr-0279.webp", "assets/img/cr-0280.webp", "assets/img/cr-0281.webp", "assets/img/cr-0282.webp"],320:["assets/img/cr-0214.webp", "assets/img/cr-0215.webp", "assets/img/cr-0216.webp"],13:["assets/img/cr-0217.webp"],14:["assets/img/cr-0218.webp"],15:["assets/img/cr-0219.webp"]};
+var AC_START = {330:2, 329:1, 328:1, 326:2, 327:0, 130:0, 129:0, 128:0, 126:0, 125:0, 124:0, 123:2, 122:0, 325:0, 320:0, 324:1};
+  var AC_SLIDES = {330:["assets/img/cr-0298.webp", "assets/img/cr-0299.webp", "assets/img/cr-0300.webp", "assets/img/cr-0301.webp", "assets/img/cr-0302.webp", "assets/img/cr-0303.webp"],329:["assets/img/cr-0293.webp", "assets/img/cr-0294.webp", "assets/img/cr-0295.webp", "assets/img/cr-0296.webp"],328:["assets/img/cr-0287.webp", "assets/img/cr-0288.webp", "assets/img/cr-0289.webp", "assets/img/cr-0290.webp"],326:["assets/img/cr-0271.webp", "assets/img/cr-0272.webp", "assets/img/cr-0273.webp", "assets/img/cr-0274.webp"],327:["assets/img/cr-0275.webp", "assets/img/cr-0276.webp", "assets/img/cr-0277.webp", "assets/img/cr-0278.webp"],130:["assets/img/cr-0283.webp"],129:["assets/img/cr-0196.webp"],128:["assets/img/cr-0197.webp", "assets/img/cr-0198.webp", "assets/img/cr-0199.webp"],126:["assets/img/cr-0200.webp", "assets/img/cr-0201.webp", "assets/img/cr-0202.webp"],125:["assets/img/cr-0203.webp"],124:["assets/img/cr-0204.webp"],123:["assets/img/cr-0205.webp", "assets/img/cr-0206.webp", "assets/img/cr-0207.webp"],122:["assets/img/cr-0208.webp", "assets/img/cr-0209.webp", "assets/img/cr-0210.webp"],325:["assets/img/cr-0194.webp", "assets/img/cr-0058.webp", "assets/img/cr-0193.webp"],324:["assets/img/cr-0279.webp", "assets/img/cr-0280.webp", "assets/img/cr-0281.webp", "assets/img/cr-0282.webp"],320:["assets/img/cr-0214.webp", "assets/img/cr-0215.webp", "assets/img/cr-0216.webp"],13:["assets/img/cr-0217.webp"],14:["assets/img/cr-0218.webp"],15:["assets/img/cr-0219.webp"]};
 var _acTimers = {};
 function startAcSliders() {
   Object.keys(AC_SLIDES).forEach(function(pid) {
@@ -715,6 +718,7 @@ function setCat(c) {
   var sel = document.getElementById('catSelect');
   if (sel && sel.value !== c) sel.value = c;
   buildCats(); buildProds(); updateProdCount(); fillGridGaps();
+  if (typeof reapplyTranslation === "function") reapplyTranslation();
 }
 
 function closeDropdowns() {
@@ -834,6 +838,8 @@ function setTranslateCookie(code) {
   // Some browsers/pages may have a host-scoped copy from an earlier visit.
   if (location.hostname && location.hostname.indexOf('.') > -1) {
     document.cookie = 'googtrans=' + value + ';path=/;domain=' + location.hostname + ';SameSite=Lax';
+    document.cookie = 'googtrans=' + value + ';path=/;domain=.' +
+      location.hostname.replace(/^www\./, '') + ';SameSite=Lax';
   }
 }
 
@@ -877,6 +883,47 @@ function changeLang(code) {
   window.location.reload();
 }
 
+
+/* Google Translate only scans the DOM that exists when it runs. Product cards,
+   category chips and client tiles are injected by this script afterwards, so the
+   selected language has to be re-applied once that content is on the page. */
+var _crRetrans = null;
+function reapplyTranslation() {
+  var code = getSavedLang();
+  if (code === 'en') return;
+  var tries = 0;
+  clearInterval(_crRetrans);
+  _crRetrans = setInterval(function () {
+    var combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      if (combo.value !== code) {
+        combo.value = code;
+        combo.dispatchEvent(new Event('change'));
+      } else {
+        // already set: bounce it so newly added nodes get picked up
+        combo.value = 'en';
+        combo.dispatchEvent(new Event('change'));
+        setTimeout(function () {
+          combo.value = code;
+          combo.dispatchEvent(new Event('change'));
+        }, 60);
+      }
+      clearInterval(_crRetrans);
+    }
+    if (++tries > 40) clearInterval(_crRetrans);   // ~8s then give up
+  }, 200);
+}
+
+/* Keep brand names, contact details and IDs out of the translation. */
+function markNoTranslate() {
+  var sel = 'a[href^="tel:"], a[href^="mailto:"], .logo, #langName, .cl span';
+  var els = document.querySelectorAll(sel);
+  for (var i = 0; i < els.length; i++) {
+    els[i].setAttribute('translate', 'no');
+    els[i].classList.add('notranslate');
+  }
+}
+
 function googleTranslateElementInit() {
   if (!window.google || !google.translate || !google.translate.TranslateElement) return;
   new google.translate.TranslateElement({
@@ -890,6 +937,8 @@ function initCreneuTranslation() {
   var code = getSavedLang();
   syncLanguageDropdown(code);
   setTranslateCookie(code);
+  markNoTranslate();
+  setTimeout(reapplyTranslation, 1500);
 
   if (!document.getElementById('google_translate_element')) {
     var holder = document.createElement('div');
@@ -1186,6 +1235,7 @@ hclBuild();
   var wanted = paramCat();
   if (wanted) activeCat = wanted;
   buildCats(); buildProds(); updateProdCount();
+  if (typeof reapplyTranslation === "function") reapplyTranslation();
   setTimeout(fillGridGaps, 30);
 
   if (wanted) {
@@ -1206,7 +1256,13 @@ hclBuild();
    pre-filled WhatsApp message and handed to the business number.       */
 var CR_WHATSAPP = '919871456056';
 
-function sendContactWhatsApp() {
+/* Contact form -> company inbox.
+   The site is static, so submissions are relayed by FormSubmit (formsubmit.co).
+   CR_FORM_ENDPOINT can be swapped for the hashed endpoint after activation. */
+var CR_FORM_TO = 'crenterprisedel@gmail.com';
+var CR_FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CR_FORM_TO;
+
+function sendContactWhatsApp() {          // name kept so existing markup is untouched
   var g = function (id) {
     var el = document.getElementById(id);
     return el ? el.value.trim() : '';
@@ -1228,24 +1284,68 @@ function sendContactWhatsApp() {
                 toast('Please enter a valid email address'); focus('cf-email');   return; }
   if (!msg)   { toast('Please tell us about your requirement'); focus('cf-message'); return; }
 
-  var lines = ['*New enquiry from creneuindia.com*', ''];
-  lines.push('*Name:* ' + name);
-  if (phone) lines.push('*Phone:* ' + phone);
-  lines.push('*Email:* ' + email);
-  if (subject) lines.push('*Subject:* ' + subject);
-  lines.push('', '*Message:*', msg);
+  var btn = document.querySelector('[onclick="sendContactWhatsApp()"]');
+  var label = btn ? btn.innerHTML : '';
+  if (btn) { btn.disabled = true; btn.style.opacity = '.65'; btn.innerHTML = 'Sending...'; }
+  var restore = function () {
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = label; }
+  };
 
-  var url = 'https://wa.me/' + CR_WHATSAPP + '?text=' + encodeURIComponent(lines.join('\n'));
-  var win = window.open(url, '_blank');
-  if (!win) window.location.href = url;     // popup blocked - navigate instead
+  var payload = {
+    name: name,
+    email: email,
+    phone: phone || '-',
+    subject: subject || 'General Enquiry',
+    message: msg,
+    _subject: 'Website enquiry: ' + (subject || 'General Enquiry') + ' - ' + name,
+    _template: 'table',
+    _captcha: 'false'
+  };
 
-  toast('Opening WhatsApp with your enquiry...');
+  fetch(CR_FORM_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function (r) { return r.json().catch(function () { return {}; }); })
+  .then(function (d) {
+    restore();
+    if (d && (d.success === 'true' || d.success === true)) {
+      ['cf-name', 'cf-phone', 'cf-email', 'cf-message'].forEach(function (id) {
+        var el = document.getElementById(id); if (el) el.value = '';
+      });
+      toast('Thank you - your enquiry has been sent. We will reply within 24 hours.');
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { form: 'contact', subject: payload.subject });
+      }
+    } else {
+      toast('Sorry, the message could not be sent. Please email ' + CR_FORM_TO + ' directly.');
+    }
+  })
+  .catch(function () {
+    restore();
+    toast('Network error. Please email ' + CR_FORM_TO + ' directly.');
+  });
 }
 
 
-// Hide Google Translate banner if widget is used
-setInterval(function(){
- const b=document.querySelector('.goog-te-banner-frame');
- if(b){b.style.display='none';}
- document.body.style.top='0px';
-},500);
+// Keep the Google Translate chrome out of sight - banner iframe, tooltip
+// balloon and the layout shift it introduces.
+function hideGoogleTranslateUI(){
+  var kill = document.querySelectorAll(
+    '.goog-te-banner-frame, iframe.skiptranslate, .goog-te-menu-frame, ' +
+    '.goog-te-balloon-frame, #goog-gt-tt, #goog-gt-vt');
+  for (var i = 0; i < kill.length; i++) {
+    kill[i].style.display = 'none';
+    kill[i].style.visibility = 'hidden';
+  }
+  if (document.body) {
+    document.body.style.top = '0px';
+    document.body.style.position = 'static';
+  }
+}
+setInterval(hideGoogleTranslateUI, 400);
+if (window.MutationObserver) {
+  new MutationObserver(hideGoogleTranslateUI)
+    .observe(document.documentElement, { childList: true, subtree: true });
+}

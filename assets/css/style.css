@@ -759,14 +759,37 @@ a.ntab { text-decoration:none; display:inline-flex; align-items:center; }
   overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap;border:0}
 
 
-/* Hide Google Translate UI */
-.goog-te-banner-frame.skiptranslate,
+/* Hide every part of the Google Translate widget - the site uses its own
+   language dropdown, Google only does the translating in the background. */
 .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.skiptranslate iframe,
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+.goog-te-menu-frame,
+.goog-te-balloon-frame,
+.goog-te-ftab,
+.goog-te-spinner-pos,
 .goog-tooltip,
 .goog-tooltip:hover,
 .goog-text-highlight,
-.goog-te-balloon-frame,
-#goog-gt-tt{
-display:none!important;
+#goog-gt-tt,
+#goog-gt-vt,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-OiiCO,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-l4eHX-hSRGPd,
+#google_translate_element,
+.goog-te-gadget,
+.goog-te-combo{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  width:0!important;
+  opacity:0!important;
+  pointer-events:none!important;
 }
-body{top:0!important;}
+/* Google pushes the page down for its banner and underlines translated text */
+body{top:0!important;position:static!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+font[style]{background:none!important;box-shadow:none!important}
