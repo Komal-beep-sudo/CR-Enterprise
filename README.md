@@ -77,16 +77,3 @@ Open `assets/js/site.js`, find `var products = [` and add an entry:
 
 Drop the image into `assets/img/` first. The category must already exist in the
 `cats` list for it to show up in the filter.
-
-## Google Cloud Translation setup
-
-This version no longer uses the free Google Translate website widget. The language dropdown calls `translate.php`, which sends text to Google Cloud Translation - Basic (v2) from the server. This avoids the Google translation banner and keeps the API key out of browser JavaScript.
-
-Before deploying:
-1. In Google Cloud Console, create/select a project, enable **Cloud Translation API**, and make sure billing is enabled.
-2. Create an API key and restrict it to the **Cloud Translation API**. Where practical, also apply server/IP restrictions appropriate for your Hostinger hosting.
-3. Open `translation-config.php` and replace `PASTE_YOUR_GOOGLE_CLOUD_TRANSLATION_API_KEY_HERE` with the key. Alternatively, set the server environment variable `GOOGLE_CLOUD_TRANSLATE_API_KEY`.
-4. Upload the complete site, including `translate.php`, `translation-config.php`, and the `translation-cache` folder.
-5. Test English -> French/Hindi from the language dropdown. The page should translate without the Google banner.
-
-Do not put the API key in `assets/js/site.js` or any HTML file.

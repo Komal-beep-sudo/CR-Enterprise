@@ -815,8 +815,8 @@ if (certLbEl) certLbEl.addEventListener('click', function(e) {
 // ===== FAQ =====
 
 // ===== LANGUAGE TRANSLATION =====
-// Uses Google Cloud Translation API through /translate.php.
-// No Google Translate widget is loaded, so there is no Google translation banner.
+// Uses the existing custom language dropdown and Google Translate's page translator.
+// The visitor's choice is stored locally and carried across every page of the site.
 var CRENEU_LANGUAGES = {
   en: { name: 'English' },
   hi: { name: 'Hindi' },
@@ -827,20 +827,24 @@ var CRENEU_LANGUAGES = {
   it: { name: 'Italiano' }
 };
 
-var CRENEU_TRANSLATE_ENDPOINT = '/translate.php';
-var CRENEU_SOURCE_LANG = 'en';
-var creneuCurrentLang = 'en';
-var creneuTranslationBusy = false;
-var creneuTranslationTimer = null;
-var creneuObserver = null;
-var creneuTextOriginals = new WeakMap();
-var creneuAttrOriginals = new WeakMap();
-var creneuMemoryCache = {};
+function setTranslateCookie(code) {
+  var value = code === 'en' ? '/en/en' : '/en/' + code;
+  // Google Translate reads the googtrans cookie. Set it for the whole site.
+  document.cookie = 'googtrans=' + value + ';path=/;SameSite=Lax';
+  // Some browsers/pages may have a host-scoped copy from an earlier visit.
+  if (location.hostname && location.hostname.indexOf('.') > -1) {
+    document.cookie = 'googtrans=' + value + ';path=/;domain=' + location.hostname + ';SameSite=Lax';
+  }
+}
 
 function getSavedLang() {
   var saved = '';
   try { saved = localStorage.getItem('creneuLanguage') || ''; } catch (e) {}
-  return CRENEU_LANGUAGES[saved] ? saved : 'en';
+  if (CRENEU_LANGUAGES[saved]) return saved;
+
+  var m = document.cookie.match(/(?:^|;\s*)googtrans=\/en\/([^;]+)/);
+  if (m && CRENEU_LANGUAGES[m[1]]) return m[1];
+  return 'en';
 }
 
 function syncLanguageDropdown(code) {
@@ -848,6 +852,8 @@ function syncLanguageDropdown(code) {
   var lf = document.getElementById('langFlag');
   if (ln && CRENEU_LANGUAGES[code]) ln.textContent = CRENEU_LANGUAGES[code].name;
 
+  // Reuse the flag image already present in this page's dropdown. This works
+  // for both root pages and nested market/location pages.
   var opts = document.querySelectorAll('#langOptions .lang-opt');
   for (var i = 0; i < opts.length; i++) {
     var click = opts[i].getAttribute('onclick') || '';
@@ -857,224 +863,48 @@ function syncLanguageDropdown(code) {
       break;
     }
   }
-  document.documentElement.setAttribute('lang', code);
-}
-
-function creneuShouldTranslateText(text) {
-  if (!text) return false;
-  var t = text.trim();
-  if (!t || t.length < 2) return false;
-  if (!/[A-Za-z]/.test(t)) return false;
-  if (/^(https?:\/\/|www\.|mailto:|tel:)/i.test(t)) return false;
-  if (/^[\d\s.,:+\-/%()₹$€£]+$/.test(t)) return false;
-  return true;
-}
-
-function creneuExcludedElement(el) {
-  if (!el || el.nodeType !== 1) return false;
-  if (el.closest && el.closest('#langOptions, .lang-dd, script, style, noscript, code, pre, textarea, svg')) return true;
-  if (el.hasAttribute && (el.hasAttribute('data-no-translate') || el.classList.contains('notranslate'))) return true;
-  return false;
-}
-
-function creneuCollectItems(root) {
-  root = root || document.body;
-  var items = [];
-  var seen = new Set();
-  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: function(node) {
-      var parent = node.parentElement;
-      if (!parent || creneuExcludedElement(parent)) return NodeFilter.FILTER_REJECT;
-      var original = creneuTextOriginals.has(node) ? creneuTextOriginals.get(node) : node.nodeValue;
-      if (!creneuShouldTranslateText(original)) return NodeFilter.FILTER_REJECT;
-      return NodeFilter.FILTER_ACCEPT;
-    }
-  });
-
-  var node;
-  while ((node = walker.nextNode())) {
-    if (!creneuTextOriginals.has(node)) creneuTextOriginals.set(node, node.nodeValue);
-    var original = creneuTextOriginals.get(node);
-    items.push({ type: 'text', node: node, original: original, key: original.trim() });
-    seen.add(original.trim());
-  }
-
-  var attrEls = root.querySelectorAll ? root.querySelectorAll('[placeholder],[title],[aria-label]') : [];
-  for (var i = 0; i < attrEls.length; i++) {
-    var el = attrEls[i];
-    if (creneuExcludedElement(el)) continue;
-    var attrs = ['placeholder', 'title', 'aria-label'];
-    for (var a = 0; a < attrs.length; a++) {
-      var attr = attrs[a];
-      if (!el.hasAttribute(attr)) continue;
-      var map = creneuAttrOriginals.get(el) || {};
-      if (!(attr in map)) {
-        map[attr] = el.getAttribute(attr);
-        creneuAttrOriginals.set(el, map);
-      }
-      var val = map[attr];
-      if (!creneuShouldTranslateText(val)) continue;
-      items.push({ type: 'attr', node: el, attr: attr, original: val, key: val.trim() });
-      seen.add(val.trim());
-    }
-  }
-  return items;
-}
-
-function creneuRestoreEnglish() {
-  var items = creneuCollectItems(document.body);
-  for (var i = 0; i < items.length; i++) {
-    var item = items[i];
-    if (item.type === 'text') item.node.nodeValue = item.original;
-    else item.node.setAttribute(item.attr, item.original);
-  }
-  if (document.title && document.documentElement.dataset.creneuOriginalTitle) {
-    document.title = document.documentElement.dataset.creneuOriginalTitle;
-  }
-}
-
-function creneuDecodeHtml(text) {
-  var ta = document.createElement('textarea');
-  ta.innerHTML = text;
-  return ta.value;
-}
-
-function creneuCacheKey(lang, text) {
-  return lang + '\u0000' + text;
-}
-
-async function creneuFetchTranslations(texts, target) {
-  var result = {};
-  var missing = [];
-  for (var i = 0; i < texts.length; i++) {
-    var k = creneuCacheKey(target, texts[i]);
-    if (Object.prototype.hasOwnProperty.call(creneuMemoryCache, k)) result[texts[i]] = creneuMemoryCache[k];
-    else missing.push(texts[i]);
-  }
-
-  // Google recommends keeping synchronous translation requests around 5K
-  // code points for lower latency, so group page strings into small batches.
-  var batches = [];
-  var currentBatch = [];
-  var currentChars = 0;
-  for (var m = 0; m < missing.length; m++) {
-    var nextChars = missing[m].length;
-    if (currentBatch.length && (currentBatch.length >= 80 || currentChars + nextChars > 4500)) {
-      batches.push(currentBatch);
-      currentBatch = [];
-      currentChars = 0;
-    }
-    currentBatch.push(missing[m]);
-    currentChars += nextChars;
-  }
-  if (currentBatch.length) batches.push(currentBatch);
-
-  for (var b = 0; b < batches.length; b++) {
-    var batch = batches[b];
-    var response = await fetch(CRENEU_TRANSLATE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      credentials: 'same-origin',
-      body: JSON.stringify({ source: CRENEU_SOURCE_LANG, target: target, texts: batch })
-    });
-    var payload = await response.json().catch(function(){ return {}; });
-    if (!response.ok || !payload.translations) {
-      throw new Error(payload.error || 'Translation service is unavailable.');
-    }
-    for (var j = 0; j < batch.length; j++) {
-      var translated = creneuDecodeHtml(payload.translations[j] || batch[j]);
-      result[batch[j]] = translated;
-      creneuMemoryCache[creneuCacheKey(target, batch[j])] = translated;
-    }
-  }
-  return result;
-}
-
-async function creneuTranslatePage(code) {
-  if (!CRENEU_LANGUAGES[code]) code = 'en';
-  creneuCurrentLang = code;
-  syncLanguageDropdown(code);
-
-  if (code === 'en') {
-    creneuRestoreEnglish();
-    return;
-  }
-
-  var items = creneuCollectItems(document.body);
-  var unique = [];
-  var exists = {};
-  for (var i = 0; i < items.length; i++) {
-    if (!exists[items[i].key]) { exists[items[i].key] = true; unique.push(items[i].key); }
-  }
-  if (!unique.length) return;
-
-  creneuTranslationBusy = true;
-  document.documentElement.classList.add('creneu-translating');
-  try {
-    var translated = await creneuFetchTranslations(unique, code);
-    // Ignore a stale response if the visitor switched languages mid-request.
-    if (creneuCurrentLang !== code) return;
-    for (var x = 0; x < items.length; x++) {
-      var item = items[x];
-      var value = translated[item.key];
-      if (!value) continue;
-      if (item.type === 'text') {
-        var original = item.original;
-        var leading = (original.match(/^\s*/) || [''])[0];
-        var trailing = (original.match(/\s*$/) || [''])[0];
-        item.node.nodeValue = leading + value + trailing;
-      } else {
-        item.node.setAttribute(item.attr, value);
-      }
-    }
-  } catch (err) {
-    console.error('Creneu translation error:', err);
-    if (typeof toast === 'function') toast('Translation could not be loaded. Please try again.');
-  } finally {
-    creneuTranslationBusy = false;
-    document.documentElement.classList.remove('creneu-translating');
-  }
+  document.documentElement.setAttribute('lang', code === 'en' ? 'en' : code);
 }
 
 function changeLang(code) {
   if (!CRENEU_LANGUAGES[code]) code = 'en';
   try { localStorage.setItem('creneuLanguage', code); } catch (e) {}
-  creneuTranslatePage(code);
+  setTranslateCookie(code);
+  syncLanguageDropdown(code);
+
+  // Reload so Google Translate applies the selected language to the entire page,
+  // including content generated by JavaScript.
+  window.location.reload();
 }
 
-function creneuScheduleDynamicTranslation() {
-  if (creneuCurrentLang === 'en' || creneuTranslationBusy) return;
-  clearTimeout(creneuTranslationTimer);
-  creneuTranslationTimer = setTimeout(function(){
-    creneuTranslatePage(creneuCurrentLang);
-  }, 250);
+function googleTranslateElementInit() {
+  if (!window.google || !google.translate || !google.translate.TranslateElement) return;
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'en,hi,fr,nl,pt,mg,it',
+    autoDisplay: false
+  }, 'google_translate_element');
 }
 
 function initCreneuTranslation() {
-  // Remove cookies left by the old free Google Translate widget so Chrome does
-  // not keep trying to render Google's translation layer.
-  document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-  if (location.hostname && location.hostname.indexOf('.') > -1) {
-    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
-  }
-
-  if (!document.documentElement.dataset.creneuOriginalTitle) {
-    document.documentElement.dataset.creneuOriginalTitle = document.title || '';
-  }
-
   var code = getSavedLang();
   syncLanguageDropdown(code);
-  creneuTranslatePage(code);
+  setTranslateCookie(code);
 
-  if (window.MutationObserver && document.body) {
-    creneuObserver = new MutationObserver(function(mutations) {
-      var shouldRun = false;
-      for (var i = 0; i < mutations.length; i++) {
-        if (mutations[i].addedNodes && mutations[i].addedNodes.length) { shouldRun = true; break; }
-      }
-      if (shouldRun) creneuScheduleDynamicTranslation();
-    });
-    creneuObserver.observe(document.body, { childList: true, subtree: true });
+  if (!document.getElementById('google_translate_element')) {
+    var holder = document.createElement('div');
+    holder.id = 'google_translate_element';
+    holder.setAttribute('aria-hidden', 'true');
+    holder.style.display = 'none';
+    document.body.appendChild(holder);
+  }
+
+  if (!document.getElementById('creneu-google-translate')) {
+    var script = document.createElement('script');
+    script.id = 'creneu-google-translate';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
   }
 }
 
@@ -1413,3 +1243,9 @@ function sendContactWhatsApp() {
 }
 
 
+// Hide Google Translate banner if widget is used
+setInterval(function(){
+ const b=document.querySelector('.goog-te-banner-frame');
+ if(b){b.style.display='none';}
+ document.body.style.top='0px';
+},500);
