@@ -736,8 +736,8 @@ img,svg,video,iframe{max-width:100%}
   [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important}
 }
 
-/* Sharps Container 600 ML - render smaller inside its card */
-#c600Img{max-width:58%!important;max-height:58%!important}
+/* Sharps Container 600 ML sizing is now handled proportionally in site.js
+   (volScale) together with the rest of the capacity range. */
 
 
 /* ===== multi-page navigation (anchors styled as the old tab buttons) ===== */
