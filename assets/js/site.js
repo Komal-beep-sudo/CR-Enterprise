@@ -240,7 +240,7 @@ var CR_VOL_L = {
 var CR_VOL_MIN = 0.6, CR_VOL_MAX = 25, CR_SIZE_FLOOR = 45, CR_SIZE_CEIL = 112;
 /* large sizes are set explicitly - the cube-root band cannot span a 600 ML
    and a 25 L bin and still keep the top end visually large */
-var CR_SIZE_OVERRIDE = {326: 100, 107: 104, 327: 118, 108: 112};
+var CR_SIZE_OVERRIDE = {328: 82, 104: 87, 105: 92, 326: 100, 107: 104, 327: 118, 108: 112, 313: 110};
 
 function volScale(id) {
   if (CR_SIZE_OVERRIDE[id]) return CR_SIZE_OVERRIDE[id];
