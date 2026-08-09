@@ -503,7 +503,7 @@ footer{background:linear-gradient(180deg,#0B1D3A 0%,#0d2a4a 100%);border-top:3px
 /* ===== MARKET AREA - location tabs ===== */
 .mkt-tab{display:flex;align-items:flex-start;gap:12px;text-align:left;padding:14px 15px;background:#fff;
   border:1.5px solid rgba(11,29,58,.09);border-radius:14px;cursor:pointer;width:100%;
-  box-shadow:0 3px 12px rgba(11,29,58,.06);transition:all .22s;font-family:'Outfit',sans-serif}
+  box-shadow:0 3px 12px rgba(11,29,58,.06);transition:all .22s;font-family:'Outfit',sans-serif;text-decoration:none}
 .mkt-tab:hover{transform:translateY(-3px);border-color:rgba(0,168,150,.5);box-shadow:0 10px 26px rgba(0,168,150,.16)}
 .mkt-tab.on{border-color:#00A896;background:linear-gradient(135deg,#0B1D3A,#12447F);
   box-shadow:0 12px 30px rgba(11,29,58,.24)}
