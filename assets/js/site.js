@@ -242,7 +242,7 @@ var CR_VOL_MIN = 0.6, CR_VOL_MAX = 25, CR_SIZE_FLOOR = 45, CR_SIZE_CEIL = 112;
    and a 25 L bin and still keep the top end visually large */
 var CR_SIZE_OVERRIDE = {328: 82, 104: 87, 105: 92, 326: 100, 107: 104, 327: 118, 108: 112,
   /* hub cutters & needle destroyers - cube-root of capacity, 0.3 L to 7 L */
-  314: 45, 315: 47, 316: 54, 310: 70, 311: 89, 312: 99, 313: 110};
+  314: 45, 315: 47, 316: 54, 310: 60, 311: 76, 312: 88, 313: 100};
 
 function volScale(id) {
   if (CR_SIZE_OVERRIDE[id]) return CR_SIZE_OVERRIDE[id];
