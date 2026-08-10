@@ -948,6 +948,7 @@ function initCreneuTranslation() {
   syncLanguageDropdown(code);
   setTranslateCookie(code);
   markNoTranslate();
+  crContactSentNotice();
   setTimeout(reapplyTranslation, 1500);
 
   if (!document.getElementById('google_translate_element')) {
@@ -1268,9 +1269,10 @@ var CR_WHATSAPP = '919871456056';
 
 /* Contact form -> company inbox.
    The site is static, so submissions are relayed by FormSubmit (formsubmit.co).
-   CR_FORM_ENDPOINT can be swapped for the hashed endpoint after activation. */
+   A normal form POST is used rather than AJAX: FormSubmit blocks AJAX until the
+   address is activated and is strict about origins, which is what produced the
+   "message could not be sent" error. */
 var CR_FORM_TO = 'crenterprisedel@gmail.com';
-var CR_FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + CR_FORM_TO;
 
 function sendContactWhatsApp() {          // name kept so existing markup is untouched
   var g = function (id) {
@@ -1295,13 +1297,15 @@ function sendContactWhatsApp() {          // name kept so existing markup is unt
   if (!msg)   { toast('Please tell us about your requirement'); focus('cf-message'); return; }
 
   var btn = document.querySelector('[onclick="sendContactWhatsApp()"]');
-  var label = btn ? btn.innerHTML : '';
   if (btn) { btn.disabled = true; btn.style.opacity = '.65'; btn.innerHTML = 'Sending...'; }
-  var restore = function () {
-    if (btn) { btn.disabled = false; btn.style.opacity = '1'; btn.innerHTML = label; }
-  };
+  toast('Sending your enquiry...');
 
-  var payload = {
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', { form: 'contact', subject: subject || 'General Enquiry' });
+  }
+
+  var back = location.origin + location.pathname + '?sent=1';
+  var fields = {
     name: name,
     email: email,
     phone: phone || '-',
@@ -1309,34 +1313,35 @@ function sendContactWhatsApp() {          // name kept so existing markup is unt
     message: msg,
     _subject: 'Website enquiry: ' + (subject || 'General Enquiry') + ' - ' + name,
     _template: 'table',
-    _captcha: 'false'
+    _captcha: 'false',
+    _next: back
   };
 
-  fetch(CR_FORM_ENDPOINT, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(function (r) { return r.json().catch(function () { return {}; }); })
-  .then(function (d) {
-    restore();
-    if (d && (d.success === 'true' || d.success === true)) {
-      ['cf-name', 'cf-phone', 'cf-email', 'cf-message'].forEach(function (id) {
-        var el = document.getElementById(id); if (el) el.value = '';
-      });
-      toast('Thank you - your enquiry has been sent. We will reply within 24 hours.');
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', { form: 'contact', subject: payload.subject });
-      }
-    } else {
-      toast('Sorry, the message could not be sent. Please email ' + CR_FORM_TO + ' directly.');
-    }
-  })
-  .catch(function () {
-    restore();
-    toast('Network error. Please email ' + CR_FORM_TO + ' directly.');
-  });
+  var f = document.createElement('form');
+  f.method = 'POST';
+  f.action = 'https://formsubmit.co/' + CR_FORM_TO;
+  f.style.display = 'none';
+  for (var k in fields) {
+    if (!fields.hasOwnProperty(k)) continue;
+    var inp = document.createElement('input');
+    inp.type = 'hidden'; inp.name = k; inp.value = fields[k];
+    f.appendChild(inp);
+  }
+  document.body.appendChild(f);
+  f.submit();
 }
+
+/* Show the confirmation after FormSubmit redirects back. */
+function crContactSentNotice() {
+  if (location.search.indexOf('sent=1') === -1) return;
+  setTimeout(function () {
+    toast('Thank you - your enquiry has been sent. We will reply within 24 hours.');
+  }, 600);
+  if (window.history && history.replaceState) {
+    history.replaceState({}, '', location.pathname);
+  }
+}
+
 
 
 // Keep the Google Translate chrome out of sight - banner iframe, tooltip
