@@ -790,6 +790,12 @@ iframe.skiptranslate,
   pointer-events:none!important;
 }
 /* Google pushes the page down for its banner and underlines translated text */
-body{top:0!important;position:static!important}
+body{top:0!important}
 .goog-text-highlight{background:none!important;box-shadow:none!important}
 font[style]{background:none!important;box-shadow:none!important}
+
+/* Product images fade in once decoded - stops the alt text showing while the
+   file is still downloading. */
+.pimg img{opacity:0;transition:opacity .25s ease}
+.pimg img.ld{opacity:1}
+.pimg{background:#fff}
