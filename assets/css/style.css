@@ -20,7 +20,10 @@ header{background:#fff;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px 
 .hdr{max-width:1760px;margin:0 auto;padding:0 26px;display:flex;align-items:center;justify-content:space-between;height:70px;gap:18px}
 .hdr>.logo,.hdr>.hdr-btns{flex:0 0 auto}
 .logo img{height:56px;width:auto;object-fit:contain;display:block} 
-nav{display:flex;gap:2px;align-items:center;flex:1 1 auto;justify-content:center}
+nav{display:flex;gap:0;align-items:center;flex:1 1 auto;justify-content:center}
+/* 10 nav items - step the tabs down before they wrap */
+@media(max-width:1500px){.ntab{padding:8px 8px;font-size:.9rem}}
+@media(max-width:1320px){.ntab{padding:8px 6px;font-size:.85rem}}
 .navdd{position:relative}
 .navdd .ddc{font-size:.7rem;margin-left:3px;display:inline-block;transition:transform .2s}
 .navdd:hover .ddc{transform:rotate(180deg)}
@@ -32,7 +35,7 @@ nav{display:flex;gap:2px;align-items:center;flex:1 1 auto;justify-content:center
 .navdd.dd-closed .ddmenu{opacity:0!important;visibility:hidden!important;transform:translateX(-50%) translateY(8px)!important}
 .navdd.dd-closed .ddc{transform:none!important}
 @media(max-width:900px){.ddmenu{display:none}}
-.ntab{background:none;border:none;padding:8px 14px;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:600;font-size:1rem;color:#344465;cursor:pointer;position:relative;transition:color .2s}
+.ntab{background:none;border:none;padding:8px 11px;border-radius:8px;font-family:'Outfit',sans-serif;font-weight:600;font-size:.95rem;white-space:nowrap;color:#344465;cursor:pointer;position:relative;transition:color .2s}
 .ntab:after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:0;height:2.5px;background:#00A896;border-radius:2px;transition:width .2s}
 .ntab:hover{color:#00A896}
 .ntab.on{color:#00A896}
