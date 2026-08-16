@@ -987,6 +987,11 @@ if (document.readyState === 'loading') {
 // ===== TOAST =====
 function toast(msg) {
   var t = document.getElementById('toast');
+  if (!t) {                                  // page has no toast element - create one
+    t = document.createElement('div');
+    t.id = 'toast'; t.className = 'toast';
+    document.body.appendChild(t);
+  }
   t.textContent = msg;
   t.className = 'toast show';
   setTimeout(function() { t.className = 'toast'; }, 3000);
@@ -1395,4 +1400,66 @@ setInterval(hideGoogleTranslateUI, 400);
 if (window.MutationObserver) {
   new MutationObserver(hideGoogleTranslateUI)
     .observe(document.documentElement, { childList: true, subtree: true });
+}
+
+
+/* ===== CATALOGUE DOWNLOAD (gated) =====================================
+   Captures the visitor's details, emails them to the company inbox via
+   FormSubmit, then serves the PDF. The email is sent in the background so
+   the download is never blocked by a slow network. */
+var CR_CATALOGUE_PDF = 'assets/CRENEU-Product-Catalogue.pdf';
+
+function submitCatalogueDownload() {
+  var g = function (id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+  var focus = function (id) {
+    var e = document.getElementById(id);
+    if (e) { e.focus(); e.style.borderColor = '#D64545';
+      setTimeout(function () { e.style.borderColor = '#eef2f7'; }, 2500); }
+  };
+
+  if (g('dl-company')) return;                       // honeypot
+
+  var name = g('dl-name'), org = g('dl-org'), email = g('dl-email');
+  var phone = g('dl-phone'), city = g('dl-city');
+
+  if (!name)  { toast('Please enter your name');           focus('dl-name');  return; }
+  if (!org)   { toast('Please enter your hospital or company'); focus('dl-org'); return; }
+  if (!email) { toast('Please enter your email address');  focus('dl-email'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+                toast('Please enter a valid email address'); focus('dl-email'); return; }
+  if (!phone) { toast('Please enter your phone number');   focus('dl-phone'); return; }
+
+  var btn = document.querySelector('[onclick="submitCatalogueDownload()"]');
+  if (btn) { btn.disabled = true; btn.style.opacity = '.65'; btn.innerHTML = 'Preparing download...'; }
+
+  var payload = {
+    name: name, organisation: org, email: email, phone: phone, city: city || '-',
+    _subject: 'Catalogue downloaded: ' + name + ' (' + org + ')',
+    _template: 'table', _captcha: 'false'
+  };
+
+  // notify the company - fire and forget, the download proceeds regardless
+  try {
+    fetch('https://formsubmit.co/ajax/' + CR_FORM_TO, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function () {});
+  } catch (e) {}
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'file_download', { file_name: 'CRENEU-Product-Catalogue.pdf', organisation: org });
+  }
+
+  // serve the PDF
+  var a = document.createElement('a');
+  a.href = CR_CATALOGUE_PDF;
+  a.setAttribute('download', 'CRENEU-Product-Catalogue.pdf');
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
+  var form = document.getElementById('dlForm');
+  var done = document.getElementById('dlDone');
+  if (form) form.style.display = 'none';
+  if (done) done.style.display = 'block';
+  toast('Download started');
 }
